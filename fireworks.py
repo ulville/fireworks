@@ -3,7 +3,6 @@ import time
 import math
 from random import random
 from vector2d import Vector2D
-from colorama import Fore, Style
 
 FPS = 240
 VEL = 0
@@ -11,8 +10,11 @@ ACC = 700
 RAD = 0
 BOR = 2
 
-COLORS = (Fore.RED, Fore.GREEN, Fore.YELLOW, Fore.BLUE,
-          Fore.MAGENTA, Fore.CYAN, Fore.WHITE)
+COLORS = ('\033[31m', '\033[32m', '\033[33m', '\033[34m',
+          '\033[35m', '\033[36m', '\033[37m')
+
+# R  | G  | Y  | B  | M  | C  | W
+# 31 | 32 | 33 | 34 | 35 | 36 | 37
 
 
 def get_frame_height():
@@ -66,8 +68,6 @@ def show(frame: Frame, color: str):
         frame_string = frame_string + row_string  # + '\n'
     move_home()
     print(color + frame_string)
-    # R  | G  | Y  | B  | M  | C  | W
-    # 31 | 32 | 33 | 34 | 35 | 36 | 37
 
 
 def main():
@@ -76,7 +76,7 @@ def main():
     rad = RAD
     vel = VEL
     deltaT = 1 / FPS
-    color = Style.BRIGHT + COLORS[int(random() * len(COLORS))]
+    color = '\033[1m' + COLORS[int(random() * len(COLORS))]
     # direction = (random() - 0.5)
     target = Vector2D(frame.width * random() * 1.5,
                       frame.height * random() * 1.5)
@@ -91,7 +91,7 @@ def main():
                                frame.height * (0.33 + random() * 0.34))
                 rad = RAD
                 vel = VEL
-                color = Style.BRIGHT + COLORS[int(random() * len(COLORS))]
+                color = '\033[1m' + COLORS[int(random() * len(COLORS))]
                 # direction = (random() - 0.5)
                 target = Vector2D(frame.width * random() * 1.5,
                                   frame.height * random() * 1.5)
@@ -109,7 +109,7 @@ def main():
             cen = cen + (cen - target) * vel * deltaT * 0.02
             vel = vel + ACC * deltaT
         except (KeyboardInterrupt):
-            print(Style.RESET_ALL)
+            print('\033[0m')
             break
 
 
