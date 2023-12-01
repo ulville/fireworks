@@ -18,7 +18,7 @@ COLORS = ('\033[31m', '\033[32m', '\033[33m', '\033[34m',
 
 
 def get_frame_height():
-    return (os.get_terminal_size().lines - 1) * 2
+    return (os.get_terminal_size().lines) * 2
 
 
 def get_frame_width():
@@ -38,7 +38,7 @@ class Frame:
 
 
 def move_home():
-    print("\033[0;0H", end='')
+    print("\033[1;1H", end='')
 
 
 def circle(center: Vector2D, radius: int | float, border: int | float, frame: Frame):
@@ -67,7 +67,7 @@ def show(frame: Frame, color: str):
         row_string = ''.join(row)
         frame_string = frame_string + row_string  # + '\n'
     move_home()
-    print(color + frame_string)
+    print(color + frame_string, end='')
 
 
 def main():
